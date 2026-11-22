@@ -118,22 +118,23 @@ const years=[...new Set(d.map(x=>x.year))].sort((a,b)=>b-a);
 document.getElementById("year").insertAdjacentHTML("beforeend",years.map(y=>"<option>"+y+"</option>").join(""));
 function render(){
 const q=document.getElementById("search").value.trim().toLowerCase(),y=document.getElementById("year").value,k=document.getElementById("type").value,order=document.getElementById("sort").value;
-const byNewest=(a,b)=>b.year-a.year||a.title.localeCompare(b.title);
-const byCitations=(a,b)=>{
-  const ac=Number.isInteger(a.googleScholarCitations)?a.googleScholarCitations:null;
-  const bc=Number.isInteger(b.googleScholarCitations)?b.googleScholarCitations:null;
-  // Missing Google Scholar counts are unknown, not zero; keep them last.
-  if(ac===null||bc===null)return ac===null?(bc===null?byNewest(a,b):1):-1;
-  return bc-ac||byNewest(a,b);
+// The selected sort is primary. Remaining keys follow Year > Impact Factor > Citations.
+const sortKeys=order==="impact-desc"?["impact","year","citations"]:order==="citations-desc"?["citations","year","impact"]:["year","impact","citations"];
+const sortValue=(paper,key)=>{
+  if(key==="year")return paper.year;
+  if(key==="impact")return paper.kind==="journal"&&Number.isFinite(paper.impactFactor2025)?paper.impactFactor2025:null;
+  return Number.isInteger(paper.googleScholarCitations)?paper.googleScholarCitations:null;
 };
-const byImpactFactor=(a,b)=>{
-  // Only journal articles with a recorded 2025 impact factor are ranked.
-  const ai=a.kind==="journal"&&Number.isFinite(a.impactFactor2025)?a.impactFactor2025:null;
-  const bi=b.kind==="journal"&&Number.isFinite(b.impactFactor2025)?b.impactFactor2025:null;
-  if(ai===null||bi===null)return ai===null?(bi===null?byNewest(a,b):1):-1;
-  return bi-ai||byNewest(a,b);
+const comparePublications=(a,b)=>{
+  for(const key of sortKeys){
+    const av=sortValue(a,key),bv=sortValue(b,key);
+    // Unknown citation/impact data rank after known data at the same comparison level.
+    const diff=av===null||bv===null?(av===null?(bv===null?0:1):-1):bv-av;
+    if(diff!==0)return diff;
+  }
+  return a.title.localeCompare(b.title);
 };
-const list=d.filter(x=>(!q||(x.title+" "+x.venue).toLowerCase().includes(q))&&(!y||String(x.year)===y)&&(!k||x.kind===k)).sort((a,b)=>order==="citations-desc"?byCitations(a,b):order==="impact-desc"?byImpactFactor(a,b):byNewest(a,b));
+const list=d.filter(x=>(!q||(x.title+" "+x.venue).toLowerCase().includes(q))&&(!y||String(x.year)===y)&&(!k||x.kind===k)).sort(comparePublications);
 
 document.getElementById("count").textContent="显示 "+list.length+" / "+d.length;
 document.getElementById("empty").style.display=list.length?"none":"block";
