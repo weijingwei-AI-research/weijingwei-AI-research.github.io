@@ -50,6 +50,18 @@ a{color:#087e84;text-underline-offset:3px}input,select,button{font:inherit}
 @media(max-width:800px){.shell{padding:0 24px}.hero-grid{grid-template-columns:1fr;gap:29px}.hero{padding:40px 0 39px}.interests{margin-top:25px}.hero h1{font-size:39px}}
 @media(max-width:580px){.shell{padding:0 18px}.nav{min-height:61px}.logo{font-size:15px}.navlinks{gap:13px}.navlinks a{font-size:12px}.navlinks .lang{font-size:12px;padding:6px 10px}.hero h1{font-size:35px;margin-bottom:18px}.affiliations{font-size:14px;gap:8px}.section-label{font-size:16px}.research-summary{font-size:15px;line-height:1.8}.chip{font-size:13px;padding:6px 9px}.main{padding:40px 0 60px}.publications h2{font-size:26px}.filters input{flex-basis:100%;min-width:0}.filters select{min-width:0;flex:1}.paper{grid-template-columns:40px minmax(0,1fr);gap:10px;padding:17px 13px}.paper h3{font-size:15px}.venue{font-size:13px}.year{font-size:12px}.paper-meta a{margin-left:0}}
 
+
+/* Each publication: title / venue / paper type & author role / metrics & official links. */
+.paper-content{min-width:0}
+.paper-meta{display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin-top:11px}
+.paper-meta .tag{display:inline-flex;line-height:1.45;white-space:normal;padding:4px 10px}
+.paper-meta .paper-role{background:#e9f1f5;border:1px solid #d8e6eb;color:#245064;font-weight:750}
+.paper-details{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:12px;padding-top:10px;border-top:1px solid #edf2f3}
+.paper-details .metric,.paper-details a{font-size:13px;line-height:1.5}
+.paper-details .source-link,.paper-details .citation-link{font-weight:720;color:#087b82;text-decoration:none}
+.paper-details a:hover{text-decoration:underline}
+.paper-details .meta-separator{color:#c5d2d6;font-size:13px}
+@media(max-width:580px){.paper-meta{gap:7px}.paper-meta .tag{padding:4px 8px}.paper-details{gap:9px}.paper-details .metric,.paper-details a{font-size:12.5px}}
 </style></head><body>
 <header class="header"><div class="shell nav"><a href="#top" class="logo">Academic Homepage</a><nav class="navlinks" aria-label="Navigation"><a href="#publications">Publications</a><a class="lang" href="zh/">中文</a></nav></div></header>
 <section class="hero" id="top"><div class="shell"><div class="hero-grid"><div><h1>Jingwei Wei</h1><div class="affiliations"><div>Institute of Automation, Chinese Academy of Sciences · Associate Research Professor · Master’s Supervisor</div><div>Department of Radiology, Massachusetts General Hospital · Investigator</div><div>Harvard Medical School · Visiting Associate Professor</div></div></div><div class="hero-about"><h2 class="section-label">Research Overview</h2><p class="research-summary">Addressing the need for precision diagnosis and treatment of malignant tumors and other major diseases, my research centers on medical imaging and develops AI foundation models and intelligent analysis methods to advance early disease screening, precision diagnosis, treatment response prediction, and prognostic risk assessment.</p></div></div><div class="interests"><h2 class="section-label">Research Interests</h2><div class="chips"><span class="chip">Medical Multimodal Large Models</span><span class="chip">Medical AI Agents</span><span class="chip">Medical World Models</span><span class="chip">Radiomics</span><span class="chip">Multi-omics</span></div></div></div></section>
@@ -70,15 +82,15 @@ document.getElementById("empty").style.display=list.length?"none":"block";
 document.getElementById("papers").innerHTML=list.map(x=>{
 const url=x.url&&/^https:\/\//.test(x.url)?x.url:"";
 const role=L.role[x.roleCode]||L.role.coauthor;
-const roleTag='<span class="tag">'+escapeHTML(role)+'</span>';
+const typeTag='<span class="tag paper-type">'+escapeHTML(kindNames[x.kind]||x.kind)+'</span>';
+const roleTag='<span class="tag paper-role">'+escapeHTML(role)+'</span>';
 const rank=x.ccfRank?'<span class="tag ccf">CCF '+escapeHTML(x.ccfRank)+'</span>':"";
 const hl=x.highlight?'<span class="tag highlight">Highlight</span>':"";
-const impact=x.kind==="journal"?'<span class="metric">'+L.if+': '+(x.impactFactor2025??L.na)+'</span>':"";
-const scholarUrl="https://scholar.google.com/scholar?q="+encodeURIComponent(x.title);
-const citationCount=Number.isInteger(x.googleScholarCitations)&&x.googleScholarCitations>=0?x.googleScholarCitations:null;
-const cite='<a class="scholar-citation" target="_blank" rel="noopener noreferrer" href="'+escapeHTML(scholarUrl)+'">'+escapeHTML(L.citation)+(citationCount!==null?': '+citationCount.toLocaleString():'')+' ↗</a>';
-const href=url?'<a target="_blank" rel="noopener noreferrer" href="'+escapeHTML(url)+'">'+escapeHTML(x.collectionLink?L.collection:x.direct?L.view:L.find)+' ↗</a>':"";
-return '<article class="paper"><div class="year">'+escapeHTML(x.year)+'</div><div><h3>'+escapeHTML(x.title)+'</h3><div class="venue">'+escapeHTML(x.venue)+'</div><div class="paper-meta"><span class="tag">'+escapeHTML(kindNames[x.kind]||x.kind)+'</span>'+roleTag+rank+hl+impact+cite+href+'</div></div></article>';
+const impact=x.kind==="journal"&&Number.isFinite(x.impactFactor2025)?'<span class="metric">'+L.if+': '+escapeHTML(x.impactFactor2025)+'</span>':"";
+const cite=(Number.isInteger(x.googleScholarCitations)&&x.googleScholarCitations>=0&&typeof x.googleScholarRecordUrl==="string"&&/^https:\/\/scholar\.google\.com\//.test(x.googleScholarRecordUrl))?'<a class="citation-link" target="_blank" rel="noopener noreferrer" href="'+escapeHTML(x.googleScholarRecordUrl)+'">'+escapeHTML(L.citation)+': '+x.googleScholarCitations.toLocaleString()+'</a>':"";
+const href=url?'<a class="source-link" target="_blank" rel="noopener noreferrer" href="'+escapeHTML(url)+'">'+escapeHTML(x.collectionLink?L.collection:x.direct?L.view:L.find)+' ↗</a>':"";
+const links=[impact,cite,href].filter(Boolean).join('<span class="meta-separator" aria-hidden="true">·</span>');
+return '<article class="paper"><div class="year">'+escapeHTML(x.year)+'</div><div class="paper-content"><h3>'+escapeHTML(x.title)+'</h3><div class="venue">'+escapeHTML(x.venue)+'</div><div class="paper-meta">'+typeTag+roleTag+rank+hl+'</div>'+(links?'<div class="paper-details">'+links+'</div>':'')+'</div></article>';
 }).join("");
 
 }
