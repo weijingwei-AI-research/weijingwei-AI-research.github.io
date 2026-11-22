@@ -148,9 +148,38 @@ a{color:#087e84;text-underline-offset:3px}input,select,button{font:inherit}
 .advanced-type-option{display:inline-flex;align-items:center;gap:7px;color:#344f5a;font-size:13px;cursor:pointer;white-space:nowrap}
 .advanced-type-option input{width:15px;height:15px;accent-color:#0d8488;cursor:pointer}
 @media(max-width:580px){.advanced-filter-panel{padding:15px 14px}.advanced-filter-fields{grid-template-columns:1fr;gap:12px}.advanced-role-options{gap:10px 16px}}
+
+.hero-photo{grid-area:photo;display:block;overflow:hidden;width:145px;height:188px;border:1px solid rgba(237,247,248,.53);border-radius:12px;box-shadow:0 5px 17px rgba(4,25,32,.22);background:#34414a;align-self:center}
+.hero-photo img{width:100%;height:100%;display:block;object-fit:cover;object-position:center 35%}
+.hero-grid.hero-grid-cn{grid-template-columns:145px minmax(0,1.03fr) minmax(0,1fr);grid-template-areas:"photo name ." "photo appointments overview-title" "photo appointments overview-body";column-gap:28px;row-gap:0;align-items:start}
+.hero-grid-cn .hero-overview-heading,.hero-grid-cn .hero-about{margin-left:0}
+.hero-grid.hero-grid-en{grid-template-columns:145px minmax(0,1.03fr) minmax(0,1fr);grid-template-areas:none;column-gap:28px;align-items:center}
+.hero-grid-en .hero-intro{align-self:center;transform:none}
+@media(max-width:800px){
+.hero-grid.hero-grid-cn{grid-template-columns:112px minmax(0,1fr);grid-template-areas:"photo name" "appointments appointments" "overview-title overview-title" "overview-body overview-body";column-gap:23px;align-items:center}
+.hero-grid.hero-grid-en{grid-template-columns:112px minmax(0,1fr);grid-template-areas:"photo identity" "intro intro";column-gap:23px;align-items:center}
+.hero-photo{width:112px;height:144px}
+.hero-grid-cn .hero-name h1{margin:0}
+.hero-grid-cn .affiliations{margin-top:19px}
+.hero-grid-cn .hero-overview-heading{margin-top:26px}
+.hero-grid-en .hero-photo{grid-area:photo}
+.hero-grid-en .hero-identity{grid-area:identity}
+.hero-grid-en .hero-intro{grid-area:intro;margin-top:26px;align-self:center;transform:none}
+.hero-grid-en .hero-name h1{margin-bottom:12px}
+}
+@media(max-width:580px){
+.hero-grid.hero-grid-cn{grid-template-columns:94px minmax(0,1fr);column-gap:19px}
+.hero-grid.hero-grid-en{grid-template-columns:94px minmax(0,1fr);grid-template-areas:"photo name" "appointments appointments" "intro intro";column-gap:19px}
+.hero-photo{width:94px;height:123px}
+.hero-grid-cn .affiliations{margin-top:18px}
+.hero-grid-en .hero-identity{display:contents}
+.hero-grid-en .hero-name{grid-area:name}
+.hero-grid-en .affiliations{grid-area:appointments;margin-top:18px}
+.hero-grid-en .hero-name h1{margin:0}
+}
 </style></head><body>
 <header class="header"><div class="shell nav"><a href="#top" class="logo">个人学术主页</a><nav class="navlinks" aria-label="Navigation"><a href="#publications">学术论文</a><a href="#intellectual-property">知识产权</a><a class="lang" href="../?v=20261122-language-sync">English</a></nav></div></header>
-<section class="hero" id="top"><div class="shell"><div class="hero-grid hero-grid-cn"><div class="hero-name"><h1>魏靖伟</h1></div><div class="affiliations"><div>中国科学院自动化研究所，副研究员，硕士生导师</div><div>麻省总医院放射科，研究员</div><div class="harvard-appointment">哈佛医学院<span class="appointment-punctuation">，</span>访问副教授</div><div class="hero-email"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg><a href="mailto:weijingwei2014@ia.ac.cn">weijingwei2014@ia.ac.cn</a></div></div><div class="hero-overview-heading"><h2 class="section-label">研究简介</h2></div><div class="hero-about"><p class="research-summary">面向恶性肿瘤等重大疾病的精准诊疗需求，以医学影像为核心，开展人工智能基础模型与智能分析方法研究，推动疾病早期筛查、精准诊断、疗效预测及预后风险评估。</p></div></div><div class="interests"><h2 class="section-label">研究方向</h2><div class="chips"><span class="chip">医学多模态大模型</span><span class="chip">医学智能体</span><span class="chip">医学世界模型</span><span class="chip">影像组学</span><span class="chip">多组学</span></div></div></div></section>
+<section class="hero" id="top"><div class="shell"><div class="hero-grid hero-grid-cn"><div class="hero-photo"><img src="../assets/jingwei-profile.webp" alt="魏靖伟" width="260" height="338" loading="eager" decoding="async"></div><div class="hero-name"><h1>魏靖伟</h1></div><div class="affiliations"><div>中国科学院自动化研究所，副研究员，硕士生导师</div><div>麻省总医院放射科，研究员</div><div class="harvard-appointment">哈佛医学院<span class="appointment-punctuation">，</span>访问副教授</div><div class="hero-email"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg><a href="mailto:weijingwei2014@ia.ac.cn">weijingwei2014@ia.ac.cn</a></div></div><div class="hero-overview-heading"><h2 class="section-label">研究简介</h2></div><div class="hero-about"><p class="research-summary">面向恶性肿瘤等重大疾病的精准诊疗需求，以医学影像为核心，开展人工智能基础模型与智能分析方法研究，推动疾病早期筛查、精准诊断、疗效预测及预后风险评估。</p></div></div><div class="interests"><h2 class="section-label">研究方向</h2><div class="chips"><span class="chip">医学多模态大模型</span><span class="chip">医学智能体</span><span class="chip">医学世界模型</span><span class="chip">影像组学</span><span class="chip">多组学</span></div></div></div></section>
 <main class="shell main"><section class="publications" id="publications"><h2>学术论文</h2><div class="filters"><input id="search" type="search" placeholder="检索论文标题或期刊…" aria-label="检索论文标题或期刊…"><select id="year" aria-label="year"><option value="">全部年份</option></select><select id="type" aria-label="type"><option value="">全部类型</option><option value="journal">期刊论文</option><option value="conference">会议论文</option><option value="abstract">会议摘要</option><option value="book">著作 / 章节</option><option value="accepted">已接收</option></select><select id="sort" aria-label="论文排序方式"><option value="newest">按年份排序</option><option value="citations-desc">按引用次数排序</option><option value="impact-desc">按影响因子排序</option></select></div>
 <div class="advanced-filter-bar">
   <button type="button" id="advanced-filter-toggle" class="advanced-filter-toggle" aria-expanded="false" aria-controls="advanced-filter-panel">
