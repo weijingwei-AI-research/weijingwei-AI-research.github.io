@@ -131,7 +131,7 @@ const role=L.role[x.roleCode]||L.role.coauthor;
 const typeTag='<span class="tag paper-type">'+escapeHTML(kindNames[x.kind]||x.kind)+'</span>';
 const roleTag='<span class="tag paper-role">'+escapeHTML(role)+'</span>';
 const rank=x.ccfRank?'<span class="tag ccf">CCF '+escapeHTML(x.ccfRank)+'</span>':"";
-const ei=x.eiProceedingsIndexed?'<span class="tag ei-tag" title="Ei Compendex: conference proceedings indexed; paper-level accession number not independently checked">EI</span>':"";
+const ei=x.eiProceedingsIndexed?'<span class="tag ei-tag" title="Ei Compendex: conference proceedings indexed; paper-level accession number not independently checked">EI (Proceedings)</span>':"";
 const hl=x.highlight?'<span class="tag highlight">Highlight</span>':"";
 const impact=x.kind==="journal"&&Number.isFinite(x.impactFactor2025)?'<span class="tag if-tag" title="2025 JCR Impact Factor">IF: '+escapeHTML(x.impactFactor2025)+'</span>':"";
 const scholarUrl='https://scholar.google.com/scholar?q='+encodeURIComponent(x.title);
