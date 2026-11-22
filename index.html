@@ -16,7 +16,7 @@ a{color:#087e84;text-underline-offset:3px}input,select,button{font:inherit}
 .hero-grid{display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);grid-template-areas:"name overview-title" "appointments overview-body";column-gap:65px;row-gap:0}
 .hero h1{font-size:clamp(36px,3.6vw,45px);line-height:1.16;letter-spacing:-.036em;margin:0 0 22px;font-weight:750}
 .affiliations{display:flex;flex-direction:column;gap:9px;color:#e1edf0;font-size:15px;line-height:1.65}
-.hero-name{grid-area:name}.hero-name h1{margin:0 0 22px}.hero-overview-heading{grid-area:overview-title;align-self:start}.hero-overview-heading .section-label{font-size:20px;line-height:1.45;margin:0}.affiliations{grid-area:appointments}.hero-about{grid-area:overview-body;padding-top:0}
+.hero-name{grid-area:name}.hero-name h1{margin:0 0 22px}.hero-overview-heading{grid-area:overview-title;align-self:end}.hero-overview-heading .section-label{font-size:20px;line-height:1.45;margin:0 0 8px}.affiliations{grid-area:appointments}.hero-about{grid-area:overview-body;padding-top:0}
 .section-label{font-size:16px;font-weight:750;line-height:1.6;color:#fff;margin:0 0 12px}
 .research-summary{margin:0;font-size:16px;color:#e6f1f3;line-height:1.85;max-width:610px}
 .interests{margin-top:32px;border-top:1px solid #628390;padding-top:21px}
@@ -82,11 +82,11 @@ a{color:#087e84;text-underline-offset:3px}input,select,button{font:inherit}
 /* Desktop title and affiliation/summary starts use corresponding grid rows. */
 .hero-grid{align-items:start}
 .hero-name,.hero-overview-heading,.affiliations,.hero-about{min-width:0}
-.hero-overview-heading{align-self:start}
+.hero-overview-heading{align-self:end}
 .affiliations,.hero-about{align-self:start}
-.paper-meta{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:nowrap}
-.paper-labels{display:flex;align-items:center;flex:1 1 auto;gap:7px;min-width:0;flex-wrap:wrap}
-.paper-meta .source-link{display:inline-flex;align-items:center;margin-left:auto;flex:0 0 auto;white-space:nowrap;font-size:13px;font-weight:720;color:#087b82;text-decoration:none}
+.paper-meta{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;column-gap:16px;row-gap:8px}
+.paper-labels{display:flex;align-items:center;gap:7px;min-width:0;flex-wrap:wrap}
+.paper-meta .source-link{display:inline-flex;align-items:center;justify-self:end;margin-left:0;white-space:nowrap;font-size:13px;font-weight:720;color:#087b82;text-decoration:none}
 .paper-meta .source-link:hover{text-decoration:underline}
 .paper-details .citation-link{font-size:13px;color:#087b82;font-weight:720;text-decoration:none}
 @media(max-width:580px){.paper-meta{gap:9px}.paper-meta .source-link{font-size:12px}.paper-details .citation-link{font-size:12.5px}}
@@ -116,7 +116,7 @@ const rank=x.ccfRank?'<span class="tag ccf">CCF '+escapeHTML(x.ccfRank)+'</span>
 const hl=x.highlight?'<span class="tag highlight">Highlight</span>':"";
 const impact=x.kind==="journal"?'<span class="metric">'+L.if+': '+(Number.isFinite(x.impactFactor2025)?escapeHTML(x.impactFactor2025):L.na)+'</span>':"";
 const scholarUrl='https://scholar.google.com/scholar?q='+encodeURIComponent(x.title);
-const cite='<a class="citation-link" target="_blank" rel="noopener noreferrer" href="'+escapeHTML(scholarUrl)+'" title="Search by publication title on Google Scholar">Citations: Google Scholar ↗</a>';
+const cite='<a class="citation-link" target="_blank" rel="noopener noreferrer" href="'+escapeHTML(scholarUrl)+'" title="Search by publication title on Google Scholar">Citations on Google Scholar ↗</a>';
 const href=url?'<a class="source-link" target="_blank" rel="noopener noreferrer" href="'+escapeHTML(url)+'">'+escapeHTML(x.collectionLink?L.collection:x.direct?L.view:L.find)+' ↗</a>':"";
 const links=[impact,cite].filter(Boolean).join('<span class="meta-separator" aria-hidden="true">·</span>');
 return '<article class="paper"><div class="year">'+escapeHTML(x.year)+'</div><div class="paper-content"><h3>'+escapeHTML(x.title)+'</h3><div class="venue">'+escapeHTML(x.venue)+'</div><div class="paper-meta"><div class="paper-labels">'+typeTag+roleTag+rank+hl+'</div>'+href+'</div>'+(links?'<div class="paper-details">'+links+'</div>':'')+'</div></article>';
