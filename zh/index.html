@@ -116,10 +116,9 @@ a{color:#087e84;text-underline-offset:3px}input,select,button{font:inherit}
 .paper-labels .citation-link{font-size:12px;line-height:1.5;white-space:nowrap;color:#087b82;font-weight:700;text-decoration:none;margin-left:4px}
 .paper-labels .citation-link:hover{text-decoration:underline}
 @media(max-width:580px){.paper-labels .citation-link{font-size:12px;margin-left:0}}
-/* Consistent hero typography: appointments match overview copy; section headings share a scale. */
-.hero .affiliations,.hero .research-summary{font-size:16px}
-.hero .hero-overview-heading .section-label,.hero .interests .section-label{font-size:22px;line-height:1.35;font-weight:750}
-@media(max-width:580px){.hero .affiliations,.hero .research-summary{font-size:15px}.hero .hero-overview-heading .section-label,.hero .interests .section-label{font-size:16px}}
+/* Keep original name, affiliation and summary type sizes; match interests heading to overview. */
+.hero .interests .section-label{font-size:22px;line-height:1.35}
+@media(max-width:580px){html[lang="zh-CN"] .hero .interests .section-label{font-size:16px}}
 
 </style></head><body>
 <header class="header"><div class="shell nav"><a href="#top" class="logo">个人学术主页</a><nav class="navlinks" aria-label="Navigation"><a href="#publications">学术论文</a><a href="#intellectual-property">知识产权</a><a class="lang" href="../?v=20261122-language-sync">English</a></nav></div></header>
