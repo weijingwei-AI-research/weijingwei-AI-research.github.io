@@ -121,7 +121,7 @@ const role=L.role[x.roleCode]||L.role.coauthor;
 const typeTag='<span class="tag paper-type">'+escapeHTML(kindNames[x.kind]||x.kind)+'</span>';
 const roleTag='<span class="tag paper-role">'+escapeHTML(role)+'</span>';
 const rank=x.ccfRank?'<span class="tag ccf">CCF '+escapeHTML(x.ccfRank)+'</span>':"";
-const ei=x.eiProceedingsIndexed?'<span class="tag ei-tag" title="EI Compendex：会议论文集收录范围已核实，暂未独立查验此篇的检索号">EI</span>':"";
+const ei=x.eiProceedingsIndexed?'<span class="tag ei-tag" title="EI Compendex：会议论文集收录范围已核实，暂未独立查验此篇的检索号">EI（会议集）</span>':"";
 const hl=x.highlight?'<span class="tag highlight">Highlight</span>':"";
 const impact=x.kind==="journal"&&Number.isFinite(x.impactFactor2025)?'<span class="tag if-tag" title="2025 JCR 影响因子">影响因子: '+escapeHTML(x.impactFactor2025)+'</span>':"";
 const scholarUrl='https://scholar.google.com/scholar?q='+encodeURIComponent(x.title);
